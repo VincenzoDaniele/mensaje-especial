@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensaje Especial</title>
+    <script>
+        async function verificarUbicacion() {
+            try {
+                let response = await fetch("https://ipapi.co/json/");
+                let data = await response.json();
+                
+                if (data.country_code === "ES") { // Código de país para España
+                    document.getElementById("mensaje").innerHTML = "<h2>¡Bienvenida a España! ❤️</h2><p>Este es tu mensaje secreto: 'Te amo mucho y te extraño'.</p>";
+                } else {
+                    document.getElementById("mensaje").innerHTML = "<h2>Acceso restringido</h2><p>Este mensaje solo se puede ver desde España.</p>";
+                }
+            } catch (error) {
+                document.getElementById("mensaje").innerHTML = "<h2>Error</h2><p>No se pudo verificar tu ubicación.</p>";
+            }
+        }
+    </script>
+</head>
+<body onload="verificarUbicacion()">
+    <div id="mensaje" style="text-align:center; margin-top: 50px;"></div>
+</body>
+</html>
